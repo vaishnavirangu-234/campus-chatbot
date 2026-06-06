@@ -1,0 +1,37 @@
+   [
+   {
+    "id": 1,
+    "name": "Coding Club",
+    "category": "Technical",
+    "faculty_coordinator": "Dr. Rajesh Kumar",
+    "description": "Conducts coding contests, DSA sessions, and hackathons."
+  },
+  {
+    "id": 2,
+    "name": "AI & ML Club",
+    "category": "Technical",
+    "faculty_coordinator": "Dr. Anitha",
+    "description": "Focuses on Artificial Intelligence and Machine Learning projects."
+  },
+  {
+    "id": 3,
+    "name": "Robotics Club",
+    "category": "Technical",
+    "faculty_coordinator": "Prof. Srinivas",
+    "description": "Builds robotics and embedded systems projects."
+  },
+  {
+    "id": 4,
+    "name": "Cultural Club",
+    "category": "Cultural",
+    "faculty_coordinator": "Mrs. Lakshmi",
+    "description": "Organizes dance, music, and cultural activities."
+  },
+  {
+    "id": 5,
+    "name": "Sports Club",
+    "category": "Sports",
+    "faculty_coordinator": "Mr. Ramesh",
+    "description": "Manages sports events and tournaments."
+  }
+]

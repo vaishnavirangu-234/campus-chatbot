@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "place_name": "Lecture Halls (Ground Floor)",
+    "building": "Main Block",
+    "floor": "Ground",
+    "category": "classroom_block",
+    "range": {
+      "type": "list",
+      "values": ["LH 1", "LH 2", "LH 3", "LH 4", "LH 5", "LH 6"]
+    }
+  },
+  {
+    "id": 2,
+    "place_name": "Library",
+    "building": "Main Block",
+    "floor": "Ground",
+    "category": "academic"
+  },
+  {
+    "id": 3,
+    "place_name": "Laboratories (Ground Floor)",
+    "building": "Main Block",
+    "floor": "Ground",
+    "category": "lab_block",
+    "range": {
+      "type": "list",
+      "values": [
+        "PPS Lab",
+        "Chemistry Lab",
+        "Simulation Lab",
+        "CSE & IT Lab",
+        "English Lab",
+        "ECE Lab",
+        "AE Lab"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "place_name": "Seminar Hall",
+    "building": "Main Block",
+    "floor": "Ground",
+    "category": "hall"
+  },
+  {
+    "id": 5,
+    "place_name": "Staff Rooms (Ground Floor)",
+    "building": "Main Block",
+    "floor": "Ground",
+    "category": "staff_block",
+    "range": {
+      "type": "count",
+      "values": 2
+    }
+  },
+
+  {
+    "id": 6,
+    "place_name": "Lecture Halls (First Floor)",
+    "building": "Main Block",
+    "floor": "First",
+    "category": "classroom_block",
+    "range": {
+      "type": "list",
+      "values": [
+        "LH 101", "LH 102", "LH 103", "LH 104", "LH 105",
+        "LH 106", "LH 107", "LH 108", "LH 109", "LH 110",
+        "LH 111", "LH 112", "LH 113", "LH 114", "LH 115",
+        "LH 116", "LH 117", "LH 118"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "place_name": "Office Room",
+    "building": "Main Block",
+    "floor": "First",
+    "category": "admin"
+  },
+  {
+    "id": 8,
+    "place_name": "Principal Office",
+    "building": "Main Block",
+    "floor": "First",
+    "category": "admin"
+  },
+  {
+    "id": 9,
+    "place_name": "Sports Room",
+    "building": "Main Block",
+    "floor": "First",
+    "category": "sports"
+  },
+  {
+    "id": 10,
+    "place_name": "Staff Rooms (First Floor)",
+    "building": "Main Block",
+    "floor": "First",
+    "category": "staff_block",
+    "range": {
+      "type": "count",
+      "values": 3
+    }
+  }
+]

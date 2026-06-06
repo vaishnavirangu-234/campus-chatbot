@@ -1,0 +1,37 @@
+[
+{
+    "id": 1,
+    "name": "Central Library",
+    "location": "Block A - Ground Floor",
+    "timings": "8:00 AM - 8:00 PM",
+    "description": "Provides academic books, journals, and digital resources."
+  },
+  {
+    "id": 2,
+    "name": "Placement Cell",
+    "location": "Block B - 2nd Floor",
+    "timings": "9:00 AM - 5:00 PM",
+    "description": "Handles placements, internships, and training activities."
+  },
+  {
+    "id": 3,
+    "name": "Computer Lab",
+    "location": "CSE Block",
+    "timings": "9:00 AM - 6:00 PM",
+    "description": "Equipped with high-performance systems and internet access."
+  },
+  {
+    "id": 4,
+    "name": "Cafeteria",
+    "location": "Near Main Ground",
+    "timings": "8:00 AM - 7:00 PM",
+    "description": "Provides snacks, meals, and beverages."
+  },
+  {
+    "id": 5,
+    "name": "Auditorium",
+    "location": "Main Campus",
+    "timings": "Event Based",
+    "description": "Used for seminars, workshops, and cultural events."
+  }
+]

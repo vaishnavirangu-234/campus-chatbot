@@ -1,0 +1,29 @@
+[
+{
+    "id": 1,
+    "title": "AI & ML Workshop",
+    "date": "2026-06-10",
+    "time": "10:00 AM",
+    "venue": "Seminar Hall",
+    "organizer": "AI Club",
+    "description": "Hands-on workshop on Machine Learning and Generative AI."
+  },
+  {
+    "id": 2,
+    "title": "Annual Cultural Fest",
+    "date": "2026-07-15",
+    "time": "5:00 PM",
+    "venue": "Open Auditorium",
+    "organizer": "Cultural Committee",
+    "description": "Music, dance, drama, and fun activities."
+  },
+  {
+    "id": 3,
+    "title": "Hackathon 2026",
+    "date": "2026-08-01",
+    "time": "9:00 AM",
+    "venue": "Computer Science Block",
+    "organizer": "Coding Club",
+    "description": "24-hour coding competition for students."
+  }
+]

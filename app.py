@@ -9,6 +9,9 @@ from src.web_scraper import CampusWebScraper
 from src.knowledge_base import KnowledgeBase
 from src.llm_handler import LLMHandler
 from src.location_service import LocationService
+
+from src.context_builder import ContextBuilder
+
 import json
 import os
 
@@ -38,6 +41,9 @@ if 'llm_handler' not in st.session_state:
 
 if 'location_service' not in st.session_state:
     st.session_state.location_service = LocationService()
+
+if 'context_builder' not in st.session_state:
+    st.session_state.context_builder = ContextBuilder()
 
 # Custom CSS
 st.markdown("""
@@ -123,8 +129,26 @@ if menu_option == "💬 Chat":
 
     if send_button and user_input:
         # Search knowledge base
-        search_results = st.session_state.kb.search(user_input, k=3)
-        context = "\n".join([r['content'] for r in search_results])
+        search_results = st.session_state.kb.search(
+            user_input,
+            k=3
+        )
+
+        rag_context = "\n".join(
+            [r["content"] for r in search_results]
+        )
+
+        db_context = st.session_state.context_builder.build_context(
+            user_input
+        )
+
+        context = f"""
+        Database Context:
+        {db_context}
+
+        Document Context:
+        {rag_context}
+        """
         
         # Get LLM response
         with st.spinner("Thinking..."):
@@ -280,40 +304,6 @@ elif menu_option == "🏢 Facilities":
     else:
         st.info("No facilities found in this category.")
 
-# elif menu_option == "📍 Locations":
-#     st.header("📍 Campus Locations")
-    
-#     location_search = st.text_input("Search location...", placeholder="e.g., Library, Cafeteria")
-    
-#     if location_search:
-#         locations = st.session_state.db.search_location(location_search)
-        
-#         if locations:
-#             for location in locations:
-#                 with st.container():
-#                     st.subheader(location['place_name'])
-                    
-#                     col1, col2 = st.columns(2)
-                    
-#                     with col1:
-#                         st.write(f"**Building:** {location['building']}")
-#                         st.write(f"**Floor:** {location['floor']}")
-                    
-#                     with col2:
-#                         if location['latitude']:
-#                             st.write(f"**Coordinates:** {location['latitude']}, {location['longitude']}")
-                    
-#                     if location['description']:
-#                         st.write(f"**Info:** {location['description']}")
-                    
-#                     if location['access_info']:
-#                         st.info(f"**Access:** {location['access_info']}")
-                
-#                 st.divider()
-#         else:
-#             st.warning("Location not found.")
-#     else:
-#         st.info("Enter a location name to search.")
 elif menu_option == "📍 Locations":
     st.header("📍 Campus Locations")
 
@@ -452,44 +442,44 @@ elif menu_option == "⚙️ Admin Panel":
             st.subheader("Add New Facility")
 
             with st.form("add_facility_form"):
-               name = st.text_input("Facility Name")
-               category = st.selectbox(
-              "Category",
-              ["Academic", "Food & Dining", "Health & Wellness",
-              "Recreation", "Administrative"]
-            )
+                name = st.text_input("Facility Name")
+                category = st.selectbox(
+                "Category",
+                ["Academic", "Food & Dining", "Health & Wellness",
+                "Recreation", "Administrative"]
+                    )
 
-            location = st.text_input("Location")
-            description = st.text_area("Description")
+                location = st.text_input("Location")
+                description = st.text_area("Description")
 
-            hours_open = st.text_input("Open Time")
-            hours_close = st.text_input("Close Time")
+                hours_open = st.text_input("Open Time")
+                hours_close = st.text_input("Close Time")
 
-            contact_name = st.text_input("Contact Person")
-            contact_phone = st.text_input("Contact Phone")
+                contact_name = st.text_input("Contact Person")
+                contact_phone = st.text_input("Contact Phone")
 
-            capacity = st.number_input("Capacity", min_value=0)
+                capacity = st.number_input("Capacity", min_value=0)
 
-            amenities = st.text_input(
-            "Amenities (comma separated)"
-            )
+                amenities = st.text_input(
+                "Amenities (comma separated)"
+                )
 
-            if st.form_submit_button("Add Facility"):
+                if st.form_submit_button("Add Facility"):
 
-                 st.session_state.db.insert_facility(
-                   name,
-                   category,
-                   location,
-                   description,
-                   hours_open,
-                   hours_close,
-                   contact_name,
-                   contact_phone,
-                   capacity,
-                   amenities
-               )
+                    st.session_state.db.insert_facility(
+                    name,
+                    category,
+                    location,
+                    description,
+                    hours_open,
+                    hours_close,
+                    contact_name,
+                    contact_phone,
+                    capacity,
+                    amenities
+                )
 
-            st.success("Facility added successfully!")
+                st.success("Facility added successfully!")
         elif admin_option == "View Analytics":
             st.subheader("Analytics")
             

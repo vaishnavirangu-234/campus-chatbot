@@ -1,6 +1,9 @@
 venv/
+.venv/
 __pycache__/
 *.pyc
 *.db
 .vscode/
 .env
+.streamlit/
+data/faiss_index/

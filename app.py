@@ -379,8 +379,8 @@ elif menu_option == "⚙️ Admin Panel":
         st.success("Admin access granted")
         
         admin_option = st.radio(
-            "Admin Options",
-            ["Upload Documents", "Add Event", "Add Club", "Add Facility", "View Analytics"]
+        "Admin Options",
+        ["Upload Documents", "Add Event", "Add Club", "Add Facility", "View Analytics"]
         )
         
         if admin_option == "Upload Documents":
@@ -457,40 +457,39 @@ elif menu_option == "⚙️ Admin Panel":
               "Category",
               ["Academic", "Food & Dining", "Health & Wellness",
               "Recreation", "Administrative"]
-        )
-
-        location = st.text_input("Location")
-        description = st.text_area("Description")
-
-        hours_open = st.text_input("Open Time")
-        hours_close = st.text_input("Close Time")
-
-        contact_name = st.text_input("Contact Person")
-        contact_phone = st.text_input("Contact Phone")
-
-        capacity = st.number_input("Capacity", min_value=0)
-
-        amenities = st.text_input(
-            "Amenities (comma separated)"
-        )
-
-        if st.form_submit_button("Add Facility"):
-
-            st.session_state.db.insert_facility(
-                name,
-                category,
-                location,
-                description,
-                hours_open,
-                hours_close,
-                contact_name,
-                contact_phone,
-                capacity,
-                amenities
             )
 
-            st.success("Facility added successfully!")  
+            location = st.text_input("Location")
+            description = st.text_area("Description")
 
+            hours_open = st.text_input("Open Time")
+            hours_close = st.text_input("Close Time")
+
+            contact_name = st.text_input("Contact Person")
+            contact_phone = st.text_input("Contact Phone")
+
+            capacity = st.number_input("Capacity", min_value=0)
+
+            amenities = st.text_input(
+            "Amenities (comma separated)"
+            )
+
+            if st.form_submit_button("Add Facility"):
+
+                 st.session_state.db.insert_facility(
+                   name,
+                   category,
+                   location,
+                   description,
+                   hours_open,
+                   hours_close,
+                   contact_name,
+                   contact_phone,
+                   capacity,
+                   amenities
+               )
+
+            st.success("Facility added successfully!")
         elif admin_option == "View Analytics":
             st.subheader("Analytics")
             

@@ -306,7 +306,19 @@ class CampusDatabase:
         conn.close()
         
         return results
-    
+    def get_all_facilities(self):
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        cursor.execute(
+        "SELECT * FROM facilities WHERE is_active = 1"
+        )
+
+        results = [dict(row) for row in cursor.fetchall()]
+        conn.close()
+
+        return results
     def insert_location(self, place_name: str, building: str, floor: str,
                        latitude: float = None, longitude: float = None,
                        description: str = None, access_info: str = None):

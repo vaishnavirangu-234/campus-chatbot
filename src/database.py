@@ -237,7 +237,17 @@ class CampusDatabase:
         conn.close()
         
         return results
-    
+    def delete_event(self, event_id):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        cursor.execute(
+        "DELETE FROM events WHERE id = ?",
+        (event_id,)
+       )
+
+        conn.commit()
+        conn.close()
     def insert_club(self, name: str, description: str, coordinator_name: str,
                    coordinator_email: str, coordinator_phone: str = None,
                    meeting_day: str = None, meeting_time: str = None,
@@ -270,7 +280,17 @@ class CampusDatabase:
         conn.close()
         
         return results
-    
+    def delete_club(self, club_id):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "DELETE FROM clubs WHERE id = ?",
+            (club_id,)
+         )
+
+        conn.commit()
+        conn.close()
     def insert_facility(self, name: str, category: str, location: str,
                        description: str = None, hours_open: str = None,
                        hours_close: str = None, contact_name: str = None,
@@ -306,19 +326,17 @@ class CampusDatabase:
         conn.close()
         
         return results
-    def get_all_facilities(self):
+    def delete_facility(self, facility_id):
         conn = sqlite3.connect(self.db_path)
-        conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
         cursor.execute(
-        "SELECT * FROM facilities WHERE is_active = 1"
-        )
+        "DELETE FROM facilities WHERE id = ?",
+        (facility_id,)
+       )
 
-        results = [dict(row) for row in cursor.fetchall()]
+        conn.commit()
         conn.close()
-
-        return results
     def insert_location(self, place_name: str, building: str, floor: str,
                        latitude: float = None, longitude: float = None,
                        description: str = None, access_info: str = None):

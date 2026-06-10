@@ -9,9 +9,6 @@ from src.web_scraper import CampusWebScraper
 from src.knowledge_base import KnowledgeBase
 from src.llm_handler import LLMHandler
 from src.location_service import LocationService
-
-from src.context_builder import ContextBuilder
-
 import json
 import os
 
@@ -41,9 +38,6 @@ if 'llm_handler' not in st.session_state:
 
 if 'location_service' not in st.session_state:
     st.session_state.location_service = LocationService()
-
-if 'context_builder' not in st.session_state:
-    st.session_state.context_builder = ContextBuilder()
 
 # Custom CSS
 st.markdown("""
@@ -129,26 +123,8 @@ if menu_option == "💬 Chat":
 
     if send_button and user_input:
         # Search knowledge base
-        search_results = st.session_state.kb.search(
-            user_input,
-            k=3
-        )
-
-        rag_context = "\n".join(
-            [r["content"] for r in search_results]
-        )
-
-        db_context = st.session_state.context_builder.build_context(
-            user_input
-        )
-
-        context = f"""
-        Database Context:
-        {db_context}
-
-        Document Context:
-        {rag_context}
-        """
+        search_results = st.session_state.kb.search(user_input, k=3)
+        context = "\n".join([r['content'] for r in search_results])
         
         # Get LLM response
         with st.spinner("Thinking..."):
@@ -304,6 +280,40 @@ elif menu_option == "🏢 Facilities":
     else:
         st.info("No facilities found in this category.")
 
+# elif menu_option == "📍 Locations":
+#     st.header("📍 Campus Locations")
+    
+#     location_search = st.text_input("Search location...", placeholder="e.g., Library, Cafeteria")
+    
+#     if location_search:
+#         locations = st.session_state.db.search_location(location_search)
+        
+#         if locations:
+#             for location in locations:
+#                 with st.container():
+#                     st.subheader(location['place_name'])
+                    
+#                     col1, col2 = st.columns(2)
+                    
+#                     with col1:
+#                         st.write(f"**Building:** {location['building']}")
+#                         st.write(f"**Floor:** {location['floor']}")
+                    
+#                     with col2:
+#                         if location['latitude']:
+#                             st.write(f"**Coordinates:** {location['latitude']}, {location['longitude']}")
+                    
+#                     if location['description']:
+#                         st.write(f"**Info:** {location['description']}")
+                    
+#                     if location['access_info']:
+#                         st.info(f"**Access:** {location['access_info']}")
+                
+#                 st.divider()
+#         else:
+#             st.warning("Location not found.")
+#     else:
+#         st.info("Enter a location name to search.")
 elif menu_option == "📍 Locations":
     st.header("📍 Campus Locations")
 
@@ -402,102 +412,223 @@ elif menu_option == "⚙️ Admin Panel":
         
         elif admin_option == "Add Event":
             st.subheader("Add New Event")
-            
+
             with st.form("add_event_form"):
                 title = st.text_input("Event Title")
                 description = st.text_area("Description")
                 start_date = st.date_input("Start Date")
                 location = st.text_input("Location")
                 organizer = st.text_input("Organizer")
-                category = st.selectbox("Category", ["Academic", "Sports", "Cultural", "Technical", "Social"])
-                
-                if st.form_submit_button("Add Event"):
-                    st.session_state.db.insert_event(
-                        title, description, str(start_date),
-                        location, organizer, category
-                    )
-                    st.success("Event added successfully!")
-        
+
+                category = st.selectbox(
+                "Category",
+                ["Academic", "Sports", "Cultural", "Technical", "Social"]
+                )
+
+                submit_event = st.form_submit_button("Add Event")
+
+            if submit_event:
+               st.session_state.db.insert_event(
+               title,
+               description,
+               str(start_date),
+               location,
+               organizer,
+               category
+               )
+               st.success("Event added successfully!")
+
+            st.markdown("---")
+            st.subheader("Delete Events")
+
+            events = st.session_state.db.get_upcoming_events(limit=100)
+
+            for event in events:
+               col1, col2 = st.columns([4, 1])
+
+               with col1:
+                    st.write(f"📅 {event['title']}")
+
+               with col2:
+                    if st.button(
+                       "🗑 Delete",
+                       key=f"event_{event['id']}"
+                    ):
+                     st.session_state.db.delete_event(event['id'])
+                     st.rerun()
+
         elif admin_option == "Add Club":
-            st.subheader("Add New Club")
-            
-            with st.form("add_club_form"):
-                name = st.text_input("Club Name")
-                description = st.text_area("Description")
-                coordinator_name = st.text_input("Coordinator Name")
-                coordinator_email = st.text_input("Coordinator Email")
-                coordinator_phone = st.text_input("Coordinator Phone")
-                meeting_day = st.selectbox("Meeting Day", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"])
-                meeting_time = st.time_input("Meeting Time")
-                location = st.text_input("Location")
-                
-                if st.form_submit_button("Add Club"):
-                    st.session_state.db.insert_club(
-                        name, description, coordinator_name,
-                        coordinator_email, coordinator_phone,
-                        meeting_day, str(meeting_time), location
-                    )
-                    st.success("Club added successfully!")
+           st.subheader("Add New Club")
+
+           with st.form("add_club_form"):
+             name = st.text_input("Club Name")
+             description = st.text_area("Description")
+             coordinator_name = st.text_input("Coordinator Name")
+             coordinator_email = st.text_input("Coordinator Email")
+             coordinator_phone = st.text_input("Coordinator Phone")
+
+             meeting_day = st.selectbox(
+                "Meeting Day",
+                 ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+             )
+
+             meeting_time = st.time_input("Meeting Time")
+             location = st.text_input("Location")
+
+             submit_club = st.form_submit_button("Add Club")
+
+           if submit_club:
+               st.session_state.db.insert_club(
+               name,
+               description,
+               coordinator_name,
+               coordinator_email,
+               coordinator_phone,
+               meeting_day,
+               str(meeting_time),
+               location
+              )
+               st.success("Club added successfully!")
+
+           st.markdown("---")
+           st.subheader("Delete Clubs")
+
+           clubs = st.session_state.db.get_all_clubs()
+
+           for club in clubs:
+              col1, col2 = st.columns([4, 1])
+
+              with col1:
+                 st.write(f"🎭 {club['name']}")
+
+              with col2:
+                if st.button(
+                    "🗑 Delete",
+                     key=f"club_{club['id']}"
+                ):
+                    st.session_state.db.delete_club(club['id'])
+                    st.rerun()
+
         elif admin_option == "Add Facility":
             st.subheader("Add New Facility")
 
             with st.form("add_facility_form"):
                 name = st.text_input("Facility Name")
+
                 category = st.selectbox(
-                "Category",
-                ["Academic", "Food & Dining", "Health & Wellness",
-                "Recreation", "Administrative"]
-                    )
+                    "Category",
+                    [
+                    "Academic",
+                    "Food & Dining",
+                    "Health & Wellness",
+                    "Recreation",
+                    "Administrative"
+                   ]
+                )
 
                 location = st.text_input("Location")
                 description = st.text_area("Description")
 
                 hours_open = st.text_input("Open Time")
                 hours_close = st.text_input("Close Time")
-
+ 
                 contact_name = st.text_input("Contact Person")
                 contact_phone = st.text_input("Contact Phone")
-
-                capacity = st.number_input("Capacity", min_value=0)
+ 
+                capacity = st.number_input(
+                 "Capacity",
+                 min_value=0
+                )
 
                 amenities = st.text_input(
                 "Amenities (comma separated)"
                 )
 
-                if st.form_submit_button("Add Facility"):
-
-                    st.session_state.db.insert_facility(
-                    name,
-                    category,
-                    location,
-                    description,
-                    hours_open,
-                    hours_close,
-                    contact_name,
-                    contact_phone,
-                    capacity,
-                    amenities
+                submit_facility = st.form_submit_button(
+                "Add Facility"
                 )
 
-                st.success("Facility added successfully!")
+            if submit_facility:
+               st.session_state.db.insert_facility(
+               name,
+               category,
+               location,
+               description,
+               hours_open,
+               hours_close,
+               contact_name,
+               None,
+               contact_phone,
+               capacity,
+               amenities
+               )
+
+               st.success("Facility added successfully!")
+
+            st.markdown("---")
+            st.subheader("Delete Facilities")
+
+            facilities = []
+
+            for cat in [
+               "Academic",
+               "Food & Dining",
+               "Health & Wellness",
+               "Recreation",
+               "Administrative"
+             ]:
+             facilities.extend(
+             st.session_state.db.get_facilities_by_category(cat)
+            )
+
+            for facility in facilities:
+              col1, col2 = st.columns([4, 1])
+
+              with col1:
+                 st.write(
+                    f"🏢 {facility['name']} ({facility['category']})"
+                 )
+
+              with col2:
+                 if st.button(
+                 "🗑 Delete",
+                 key=f"facility_{facility['id']}"
+                ):
+                  st.session_state.db.delete_facility(
+                    facility['id']
+                  )
+                  st.rerun()
+
         elif admin_option == "View Analytics":
-            st.subheader("Analytics")
-            
+            st.subheader("📊 Analytics")
+
             recent_queries = st.session_state.db.get_query_history(limit=10)
-            
-            st.metric("Total Queries", len(recent_queries))
-            st.metric("Active Clubs", len(st.session_state.db.get_all_clubs()))
-            st.metric("Upcoming Events", len(st.session_state.db.get_upcoming_events()))
-            
+
+            st.metric(
+              "Total Queries",
+               len(recent_queries)
+               )
+
+            st.metric(
+               "Active Clubs",
+               len(st.session_state.db.get_all_clubs())
+              )
+
+            st.metric(
+            "Upcoming Events",
+            len(st.session_state.db.get_upcoming_events())
+            )
+
             if recent_queries:
                 st.subheader("Recent Queries")
+
                 for query in recent_queries:
                     st.write(f"**Q:** {query['query']}")
                     st.write(f"**A:** {query['response'][:100]}...")
                     st.caption(query['timestamp'])
                     st.divider()
-    else:
-        if admin_password:
+        else:
+           if admin_password:
             st.error("Invalid password")
 
 # Footer

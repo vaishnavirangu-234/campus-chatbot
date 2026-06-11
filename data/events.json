@@ -1,29 +1,282 @@
 [
-{
-    "id": 1,
-    "title": "AI & ML Workshop",
-    "date": "2026-06-10",
-    "time": "10:00 AM",
-    "venue": "Seminar Hall",
-    "organizer": "AI Club",
-    "description": "Hands-on workshop on Machine Learning and Generative AI."
-  },
-  {
-    "id": 2,
-    "title": "Annual Cultural Fest",
-    "date": "2026-07-15",
-    "time": "5:00 PM",
-    "venue": "Open Auditorium",
-    "organizer": "Cultural Committee",
-    "description": "Music, dance, drama, and fun activities."
-  },
-  {
-    "id": 3,
-    "title": "Hackathon 2026",
-    "date": "2026-08-01",
-    "time": "9:00 AM",
-    "venue": "Computer Science Block",
-    "organizer": "Coding Club",
-    "description": "24-hour coding competition for students."
-  }
+    {
+        "id": 1,
+        "title": "Invitation for Alumni meet",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/img/sliders/alum.jpeg"
+    },
+    {
+        "id": 2,
+        "title": "Viksit Bharat Youth Parliament 2026, District level competitions Hanamkonda, organizing by KU College of Engineering and Technology, Kakatiya University Campus.",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "https://mybharat.gov.in/pages/event_detail?event_name=Viksit-Bharat-Youth-Parliament-2026-–-Hanamkonda&key=991134134991"
+    },
+    {
+        "id": 3,
+        "title": "SC Students -Tuition Fee- Remit the Amount into College Account Immediately.",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/pdf/sc_fee_re.jpeg"
+    },
+    {
+        "id": 4,
+        "title": "Viksit Bharat Youth Paliament - Hanamkonda - 2026",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "https://mybharat.gov.in/pages/event_detail?event_name=Viksit-Bharat-Youth-Parliament-2026-%E2%80%93-Hanamkonda&key=955134134493"
+    },
+    {
+        "id": 5,
+        "title": "KUCET Singed MoU With United Way of Hyderabad for up Skilling Students in Data Science",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/Documents/Ku_MOU.pdf"
+    },
+    {
+        "id": 6,
+        "title": "TELANGANA SCIENCE CONGRESS (TSC-2025)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/updates/Brouchure of TSC-2025_compressed.pdf"
+    },
+    {
+        "id": 7,
+        "title": "APAAR ID Creation Guide Final",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/updates/APAAR_ID_Creation_Guide_Final.pdf"
+    },
+    {
+        "id": 8,
+        "title": "Congratulations of Ph.D Awardees",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/pdf/Phd.pdf"
+    },
+    {
+        "id": 9,
+        "title": "National Science Day Celebrations",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/img/sliders/National_Science_Day_Celebrations.jpg"
+    },
+    {
+        "id": 10,
+        "title": "PM Internship Scheme Apply Now",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "https://education.sakshi.com/class/education-news/prime-ministers-internship-scheme-apply-now-172153"
+    },
+    {
+        "id": 11,
+        "title": "Summer Undergraduate Research Exposure (SURE) 2025",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "https://www.iith.ac.in/news/2025/02/05/Summer-Undergraduate-Research-Exposure/"
+    },
+    {
+        "id": 12,
+        "title": "Summer Fellowship Programme - 2025",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "https://ssp.iitm.ac.in/summer-fellowship-registration"
+    },
+    {
+        "id": 13,
+        "title": "Six Weeks Entrepreneurship Skill Development Program (5 Feb â€“ 18 Mar 2025)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/Six-week-program.php"
+    },
+    {
+        "id": 14,
+        "title": "Two Cadets from KU New Delhi R-Day Camp",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/Two-cadet-cops.php"
+    },
+    {
+        "id": 15,
+        "title": "Flag Area (26 Jan 2025)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/resources/Flag_Area_Event.jpg"
+    },
+    {
+        "id": 16,
+        "title": "Scholarship Program â€“ 25 Jan 2025 (for First Year Girls)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/resources/Event1.jpg"
+    },
+    {
+        "id": 17,
+        "title": "International Day of Education (24 Jan 2025)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/international-day-of-education.php"
+    },
+    {
+        "id": 18,
+        "title": "Depositor Education & Awareness Programme (9 Dec 2024)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/Depositor_Education&Awareness.php"
+    },
+    {
+        "id": 19,
+        "title": "Constitution of India",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/constitution-of-india.php"
+    },
+    {
+        "id": 20,
+        "title": "World Standards Day (19 Oct 2024)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/world_standards_day.php"
+    },
+    {
+        "id": 21,
+        "title": "Orientation Day 2024",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/orientation-2024.php"
+    },
+    {
+        "id": 22,
+        "title": "Technical Quiz by Data Science",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/img/sliders/slider-new8.jpg"
+    },
+    {
+        "id": 23,
+        "title": "National Library Week Celebrations (14 â€“ 20 Nov 2024)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/library-event.php"
+    },
+    {
+        "id": 24,
+        "title": "Bathukamma Celebrations 2024",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/bathukamma.php"
+    },
+    {
+        "id": 25,
+        "title": "Industrial Visit: Kakatiya Thermal Power Project (EEE)",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/img/sliders/slider-new6.jpg"
+    },
+    {
+        "id": 26,
+        "title": "Extra Curricular Activities from ECE",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/img/sliders/slider-new5.jpg"
+    },
+    {
+        "id": 27,
+        "title": "Workshop",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/pdf/workshop.pdf"
+    },
+    {
+        "id": 28,
+        "title": "FIVE DAY Online Faculty Programme",
+        "date": "",
+        "time": "",
+        "venue": "KUCET",
+        "organizer": "KUCET",
+        "description": "",
+        "registration_link": "http://kucet.ac.in/pdf/FDP%20schedule.pdf"
+    }
 ]

@@ -74,7 +74,7 @@ with st.sidebar:
     
     menu_option = st.radio(
         "Navigation",
-        ["💬 Chat", "📅 Events", "🎭 Clubs", "🏢 Facilities", 
+        ["💬 Chat", "📅 Events", "🏫 Clubs", "🏢 Facilities", 
          "📍 Locations", "❓ FAQs", "⚙️ Admin Panel"]
     )
     
@@ -154,9 +154,11 @@ if menu_option == "💬 Chat":
         st.rerun()
 
 elif menu_option == "📅 Events":
-    st.header("📅 Upcoming Events")
+    st.header("📅 Events")
     
-    events = st.session_state.db.get_upcoming_events(limit=20)
+    #events = st.session_state.db.get_upcoming_events(limit=20)
+    with open("./data/events.json", "r", encoding="utf-8") as f:
+      events = json.load(f)
     
     if events:
         for event in events:
@@ -164,31 +166,30 @@ elif menu_option == "📅 Events":
                 col1, col2 = st.columns([0.7, 0.3])
                 
                 with col1:
-                    st.subheader(event['title'])
-                    st.write(f"**Date:** {event['start_date']}")
-                    st.write(f"**Location:** {event['location']}")
-                    if event['description']:
-                        st.write(f"**Description:** {event['description']}")
-                    if event['organizer']:
-                        st.write(f"**Organizer:** {event['organizer']}")
-                
+                    st.markdown(f"### 📢 {event['title']}")
+                    st.caption("Source: KUCET Official Website")
+
                 with col2:
-                    if event['registration_link']:
-                        st.markdown(f"[Register →]({event['registration_link']})")
-                    st.caption(f"Category: {event['category']}")
-            
+                    if event.get('registration_link'):
+                        st.link_button(
+                            "🔗 View Official Notice",
+                            event['registration_link'],
+                            use_container_width=True
+                        )             
             st.divider()
     else:
-        st.info("No upcoming events found.")
+        st.info("No events found.")
 
-elif menu_option == "🎭 Clubs":
-    st.header("🎭 Student Clubs")
+elif menu_option == "🏫 Clubs":
+    st.header("🏫 Student Clubs")
     
-    clubs = st.session_state.db.get_all_clubs()
+    #clubs = st.session_state.db.get_all_clubs()
+    with open("./data/clubs.json", "r", encoding="utf-8") as f:
+     clubs = json.load(f)
     
     if clubs:
         # Search/filter
-        search_term = st.text_input("Search clubs...", placeholder="e.g., Coding, Drama")
+        search_term = st.text_input("Search clubs...", placeholder="e.g., NCC, NSS")
         
         filtered_clubs = [
             club for club in clubs
@@ -198,28 +199,51 @@ elif menu_option == "🎭 Clubs":
         
         for club in filtered_clubs:
             with st.container():
-                st.subheader(f"🎭 {club['name']}")
+                if club["category"] == "Defence":
+                    icon = "🪖"
+                elif club["category"] == "Technical":
+                    icon = "💡"
+                elif club["category"] == "Academic":
+                    icon = "📚"
+                elif club["category"] == "Sports":
+                    icon = "🏆"
+                else:
+                    icon = "🌟"
+
+                st.subheader(f"{icon} {club['name']}")
                 st.write(club['description'])
                 
                 col1, col2, col3 = st.columns(3)
                 
-                with col1:
-                    st.write(f"**Coordinator:** {club['coordinator_name']}")
-                    st.write(f"**Email:** {club['coordinator_email']}")
+                # with col1:
+                #     st.write(f"**Coordinator:** {club['coordinator_name']}")
+                #     st.write(f"**Email:** {club['coordinator_email']}")
                 
-                with col2:
-                    if club['coordinator_phone']:
-                        st.write(f"**Phone:** {club['coordinator_phone']}")
-                    if club['meeting_day']:
-                        st.write(f"**Meets:** {club['meeting_day']} at {club['meeting_time']}")
+                # with col2:
+                #     if club['coordinator_phone']:
+                #         st.write(f"**Phone:** {club['coordinator_phone']}")
+                #     if club['meeting_day']:
+                #         st.write(f"**Meets:** {club['meeting_day']} at {club['meeting_time']}")
                 
-                with col3:
-                    if club['location']:
-                        st.write(f"**Location:** {club['location']}")
-                    st.write(f"**Members:** {club['members_count']}")
-                
-                if st.button(f"Contact {club['name']}", key=f"contact_{club['id']}"):
-                    st.success(f"Email: {club['coordinator_email']}")
+                # with col3:
+                #     if club['location']:
+                #         st.write(f"**Location:** {club['location']}")
+                #     st.write(f"**Members:** {club['members_count']}")
+                st.write(f"**Category:** {club['category']}")
+
+                st.write(
+                    f"**Faculty Coordinator:** "
+                    f"{club['faculty_coordinator']}"
+                )
+                if "contact_email" in club:
+                   st.write(f"📧 Email: {club['contact_email']}")
+
+                if "contact_phone" in club:
+                   st.write(f"📞 Phone: {club['contact_phone']}")
+
+                   st.write(club['description'])
+                # if st.button(f"Contact {club['name']}", key=f"contact_{club['id']}"):
+                #     st.success(f"Email: {club['coordinator_email']}")
             
             st.divider()
     else:
@@ -377,7 +401,24 @@ elif menu_option == "⚙️ Admin Panel":
     
     if admin_password == "admin123":  # Change this in production
         st.success("Admin access granted")
-        
+        st.subheader("Website Sync")
+
+    if st.button("🔄 Refresh Events From KUCET"):
+
+        scraper = CampusWebScraper()
+
+        events = scraper.scrape_kucet_events()
+
+        with open("./data/events.json", "w", encoding="utf-8") as f:
+            json.dump(
+                events,
+                f,
+                indent=4,
+                ensure_ascii=False
+            )
+
+        st.success(f"Updated {len(events)} events!")
+
         admin_option = st.radio(
         "Admin Options",
         ["Upload Documents", "Add Event", "Add Club", "Add Facility", "View Analytics"]
@@ -499,7 +540,7 @@ elif menu_option == "⚙️ Admin Panel":
               col1, col2 = st.columns([4, 1])
 
               with col1:
-                 st.write(f"🎭 {club['name']}")
+                 st.write(f"🏫 {club['name']}")
 
               with col2:
                 if st.button(

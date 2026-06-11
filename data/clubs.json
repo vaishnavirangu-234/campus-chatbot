@@ -1,37 +1,47 @@
-   [
+  [
    {
     "id": 1,
-    "name": "Coding Club",
-    "category": "Technical",
-    "faculty_coordinator": "Dr. Rajesh Kumar",
-    "description": "Conducts coding contests, DSA sessions, and hackathons."
+    "name": "National Cadet Corps - NCC",
+    "category": "Defence",
+    "faculty_coordinator": "Lt. Dr. K. Vijay Kumar and Dr. B. Anil kumar",
+    "contact_email": "ncc@college.edu",
+    "contact_phone": "9876543210",
+    "description": "Grooming youth into disciplined and patriotic citizens by providing basic military, naval, and air training."
   },
   {
     "id": 2,
-    "name": "AI & ML Club",
-    "category": "Technical",
-    "faculty_coordinator": "Dr. Anitha",
-    "description": "Focuses on Artificial Intelligence and Machine Learning projects."
+    "name": "National Service Scheme - NSS",
+    "category": "Sports",
+    "faculty_coordinator": "Dr. D. Sailaja and M. Soujanya",
+    "contact_email": "nss@college.edu",
+    "contact_phone": "9876543210",
+    "description": "Voluntary community service and public service."
   },
   {
     "id": 3,
-    "name": "Robotics Club",
+    "name": "K-Hub",
     "category": "Technical",
     "faculty_coordinator": "Prof. Srinivas",
-    "description": "Builds robotics and embedded systems projects."
+    "contact_email": "khub@college.edu",
+    "contact_phone": "9876543210",
+    "description": "Supports students ideas and innovations."
   },
   {
     "id": 4,
-    "name": "Cultural Club",
-    "category": "Cultural",
-    "faculty_coordinator": "Mrs. Lakshmi",
-    "description": "Organizes dance, music, and cultural activities."
+    "name": "Anti-Ragging Squad",
+    "category": "Academic",
+    "faculty_coordinator": "Dr. B. Anil Kumar",
+    "contact_email": "ku@college.edu",
+    "contact_phone": "9876543210",
+    "description": "MaintainS vigilance and ensures immediate intervention in case of any ragging incidents."
   },
   {
     "id": 5,
-    "name": "Sports Club",
-    "category": "Sports",
-    "faculty_coordinator": "Mr. Ramesh",
-    "description": "Manages sports events and tournaments."
+    "name": "Extra curricular activities",
+    "category": "Sports & Technical",
+    "faculty_coordinator": "D. BhagyaLaxmi, R. Sushmita, R. Lakshman Naik, V. RamanaBabu",
+    "contact_email": "ku@college.edu",
+    "contact_phone": "9876543210",
+    "description": "Foster the holistic development of students through inclusive and diverse events."
   }
 ]

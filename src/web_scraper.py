@@ -3,16 +3,58 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from typing import List, Dict
 import time
+from urllib.parse import urljoin
 
 class CampusWebScraper:
-    def _init_(self, timeout: int = 10, max_pages: int = 50):
+    #def _init_(self, timeout: int = 10, max_pages: int = 50):
+    def __init__(self, timeout: int = 10, max_pages: int = 50):
         self.timeout = timeout
         self.max_pages = max_pages
         self.visited_urls = set()
         self.headers = {
             'User-Agent': 'Campus Chatbot/1.0 (+https://yoursite.com/bot)'
         }
-    
+
+    def scrape_kucet_events(self):
+        url = "http://kucet.ac.in"
+
+        html = self.fetch_page(url)
+
+        if not html:
+            return []
+
+        soup = BeautifulSoup(html, "html.parser")
+        contact_div = soup.find("div", id="Contact")
+
+        if not contact_div:
+            return []
+
+        events = []
+
+        for row in contact_div.find_all("tr"):
+
+            link = row.find("a")
+
+            if link:
+
+                title = link.get_text(strip=True)
+                href = link.get("href", "")
+
+                print(title)
+
+                events.append({
+                    "id": len(events) + 1,
+                    "title": title,
+                    "date": "",
+                    "time": "",
+                    "venue": "KUCET",
+                    "organizer": "KUCET",
+                    "description": "",
+                    "registration_link": urljoin(url, href)
+                })
+
+        return events
+        
     def fetch_page(self, url: str) -> str:
         """Fetch webpage content"""
         try:

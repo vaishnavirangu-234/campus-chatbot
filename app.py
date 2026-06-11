@@ -304,40 +304,6 @@ elif menu_option == "🏢 Facilities":
     else:
         st.info("No facilities found in this category.")
 
-# elif menu_option == "📍 Locations":
-#     st.header("📍 Campus Locations")
-    
-#     location_search = st.text_input("Search location...", placeholder="e.g., Library, Cafeteria")
-    
-#     if location_search:
-#         locations = st.session_state.db.search_location(location_search)
-        
-#         if locations:
-#             for location in locations:
-#                 with st.container():
-#                     st.subheader(location['place_name'])
-                    
-#                     col1, col2 = st.columns(2)
-                    
-#                     with col1:
-#                         st.write(f"**Building:** {location['building']}")
-#                         st.write(f"**Floor:** {location['floor']}")
-                    
-#                     with col2:
-#                         if location['latitude']:
-#                             st.write(f"**Coordinates:** {location['latitude']}, {location['longitude']}")
-                    
-#                     if location['description']:
-#                         st.write(f"**Info:** {location['description']}")
-                    
-#                     if location['access_info']:
-#                         st.info(f"**Access:** {location['access_info']}")
-                
-#                 st.divider()
-#         else:
-#             st.warning("Location not found.")
-#     else:
-#         st.info("Enter a location name to search.")
 elif menu_option == "📍 Locations":
     st.header("📍 Campus Locations")
 
@@ -368,24 +334,24 @@ elif menu_option == "❓ FAQs":
     
     faqs = [
         {
-            "question": "How do I register for a club?",
-            "answer": "Visit the club's location during their meeting time or contact the coordinator. Most clubs have online registration forms on the student portal."
+            "question": "Is hostel accommodation available for first-year students?",
+            "answer": "No, hostel accommodation is not available for first-year students. Hostel facilities are available starting from the second year."
         },
         {
             "question": "What are the library hours?",
-            "answer": "The central library is open from 8:00 AM to 10:00 PM on weekdays. Weekend hours are 9:00 AM to 8:00 PM."
+            "answer": "The library is open from 10:30 AM to 5:00 PM. There is a lunch break from 1:30 PM to 2:30 PM."
         },
         {
-            "question": "How do I access campus WiFi?",
-            "answer": "Connect to the 'CampusWifi' network and log in with your student ID and password."
+            "question": "Who should I contact to join NCC?",
+            "answer": "To join NCC, please contact the Associate NCC Officer Lt. Dr. K. Vijay Kumar sir. They can provide information about eligibility, enrollment procedures, and training schedules."
+        }, 
+        {
+            "question": "Who should I contact for placement-related information?",
+            "answer": "For placement-related information, please contact the Direcor of Training and Placement Placement Officer V. Ramana Babu sir or T&PO Pakala Santhosh Kumar sir. They can provide details about recruitment drives, eligibility criteria, internships, and placement activities."
         },
         {
-            "question": "Where is the placement cell?",
-            "answer": "The Placement Cell is located in Building B, Room 301. Contact: placements@college.edu"
-        },
-        {
-            "question": "How do I request a leave of absence?",
-            "answer": "Submit a leave application through the student portal at least 7 days in advance. You'll need approval from your faculty advisor and dean."
+            "question": "How much is the semester fee?",
+            "answer": "The semester fee is ₹1,200. If the fee is paid after the due date, a late fee of ₹250 will be charged, making the total ₹1,450."
         }
     ]
     

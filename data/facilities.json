@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Central Library",
     "location": "Block A - Ground Floor",
-    "timings": "8:00 AM - 8:00 PM",
+    "timings": "9:00 AM - 4:00 PM",
     "description": "Provides academic books, journals, and digital resources."
   },
   {
@@ -33,5 +33,21 @@
     "location": "Main Campus",
     "timings": "Event Based",
     "description": "Used for seminars, workshops, and cultural events."
+  },
+  {
+    "id": 6,
+    "name": "Senete Hall",
+    "location": "near Administration Building",
+    "timings": "Event Based",
+    "description": "Used for cultural events."
+
+  },
+  {
+    "id": 7,
+    "name": "Girls Hostel",
+    "location": "near 2nd gate",
+    "eligibility": "for 2nd, 3rd, 4th year students only",    
+    "description": "allowed only girls with high security system."
+ 
   }
 ]

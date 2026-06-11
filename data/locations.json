@@ -102,5 +102,33 @@
       "type": "count",
       "values": 3
     }
+  },
+  {
+    "id": 11,
+    "place_name": "Senate Hall",
+    "building": "Near Administrative Building First Gate",
+    "floor": "Ground Floor",
+    "category": "Event Hall"
+  },
+  {
+    "id": 12,
+    "place_name": "Auditorium",
+    "building": "Near Womens College at KU Cross",
+    "floor": "1st Floor",
+    "category": "Event Hall"
+  },
+  {
+    "id": 13,
+    "place_name": "Girl's Hostel",
+    "building": "D Block Near Second Gate",
+    "floor": "Ground Floor",
+    "category": "Hostel"
+  },
+  {
+    "id": 14,
+    "place_name": "Placement Cell",
+    "building": "Block B",
+    "floor": "2nd Floor",
+    "category": "Administration"
   }
 ]

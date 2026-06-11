@@ -119,18 +119,22 @@ class LocationService:
 
     # 🔍 THIS IS THE METHOD YOUR APP IS CALLING
     def search_location(self, query):
+
         query = query.lower().strip()
+        query = query.replace("'", "")
 
         results = []
 
         for loc in self.locations:
-            if (
-                query in loc["place_name"].lower()
-                or query in loc.get("category", "").lower()
-                or query in loc.get("floor", "").lower()
-                or query in loc.get("building", "").lower()
+
+           place_name = loc["place_name"].lower()
+           place_name = place_name.replace("'", "")
+
+           if (
+               query in place_name
+               or place_name in query
             ):
-                results.append(loc)
+              results.append(loc)
 
         return results
 

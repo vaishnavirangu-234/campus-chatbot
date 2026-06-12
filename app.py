@@ -369,26 +369,28 @@ elif menu_option == "⚙️ Admin Panel":
         st.success("Admin access granted")
         st.subheader("Website Sync")
 
-    if st.button("🔄 Refresh Events From KUCET"):
+        if st.button("🔄 Refresh Events From KUCET"):
 
-        scraper = CampusWebScraper()
+           scraper = CampusWebScraper()
 
-        events = scraper.scrape_kucet_events()
+           events = scraper.scrape_kucet_events()
+ 
+           with open("./data/events.json", "w", encoding="utf-8") as f:
+                json.dump(
+                  events,
+                  f,
+                  indent=4,
+                  ensure_ascii=False
+                )
 
-        with open("./data/events.json", "w", encoding="utf-8") as f:
-            json.dump(
-                events,
-                f,
-                indent=4,
-                ensure_ascii=False
-            )
-
-        st.success(f"Updated {len(events)} events!")
+           st.success(f"Updated {len(events)} events!")
 
         admin_option = st.radio(
-        "Admin Options",
-        ["Upload Documents", "Add Event", "Add Club", "Add Facility", "View Analytics"]
-        )
+           "Admin Options",
+           [
+              "Upload Documents", "Add Event", "Add Club", "Add Facility", "View Analytics"
+           ]
+          )
         
         if admin_option == "Upload Documents":
             st.subheader("Upload Campus Documents")

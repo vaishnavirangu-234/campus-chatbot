@@ -9,7 +9,7 @@ import os
 
 class KnowledgeBase:
     def __init__(self, vector_store_path: str = "./data/faiss_index", 
-                 chunk_size: int = 500, chunk_overlap: int = 50):
+                 chunk_size: int = 2000, chunk_overlap: int = 100):
         self.vector_store_path = vector_store_path
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
@@ -18,9 +18,9 @@ class KnowledgeBase:
             chunk_overlap=chunk_overlap
         )
         self.embeddings = GoogleGenerativeAIEmbeddings(
-    model="models/embedding-001",
-    google_api_key=Config.GOOGLE_API_KEY
-)
+            model="models/gemini-embedding-001",
+            google_api_key=Config.GOOGLE_API_KEY
+        )
         
         self.vector_store = None
         self._load_vector_store()
@@ -52,6 +52,7 @@ class KnowledgeBase:
         
         # Split documents
         split_docs = self.text_splitter.split_documents(lang_docs)
+        print("Split docs:", len(split_docs))
         
         # Create or update vector store
         if self.vector_store is None:

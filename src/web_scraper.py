@@ -6,7 +6,6 @@ import time
 from urllib.parse import urljoin
 
 class CampusWebScraper:
-    #def _init_(self, timeout: int = 10, max_pages: int = 50):
     def __init__(self, timeout: int = 10, max_pages: int = 50):
         self.timeout = timeout
         self.max_pages = max_pages

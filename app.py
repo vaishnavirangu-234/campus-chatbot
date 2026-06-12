@@ -107,8 +107,11 @@ if menu_option == "💬 Chat":
     # Input section
     st.markdown("---")
     with st.form("chat_form", clear_on_submit=True):
-        col1, col2 = st.columns([0.9, 0.1])
-
+        #col1, col2 = st.columns([0.9, 0.1])
+        col1, col2 = st.columns(
+            [8, 1],
+            vertical_alignment="bottom"
+        )
         with col1:
             user_input = st.text_input(
                 "Ask me anything about campus...",
@@ -120,6 +123,18 @@ if menu_option == "💬 Chat":
                 "Send",
                 use_container_width=True
             )
+
+        # with col1:
+        #     user_input = st.text_input(
+        #         "Ask me anything about campus...",
+        #         placeholder="e.g., Where is the library? How to join coding club?"
+        #     )
+
+        # with col2:
+        #     send_button = st.form_submit_button(
+        #         "Send",
+        #         use_container_width=True
+        #     )
 
     if send_button and user_input:
         # Search knowledge base
@@ -215,20 +230,6 @@ elif menu_option == "🏫 Clubs":
                 
                 col1, col2, col3 = st.columns(3)
                 
-                # with col1:
-                #     st.write(f"**Coordinator:** {club['coordinator_name']}")
-                #     st.write(f"**Email:** {club['coordinator_email']}")
-                
-                # with col2:
-                #     if club['coordinator_phone']:
-                #         st.write(f"**Phone:** {club['coordinator_phone']}")
-                #     if club['meeting_day']:
-                #         st.write(f"**Meets:** {club['meeting_day']} at {club['meeting_time']}")
-                
-                # with col3:
-                #     if club['location']:
-                #         st.write(f"**Location:** {club['location']}")
-                #     st.write(f"**Members:** {club['members_count']}")
                 st.write(f"**Category:** {club['category']}")
 
                 st.write(

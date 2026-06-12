@@ -1,5 +1,6 @@
 # app.py
 import streamlit as st
+import base64
 import uuid
 from datetime import datetime
 from config import Config
@@ -9,6 +10,7 @@ from src.web_scraper import CampusWebScraper
 from src.knowledge_base import KnowledgeBase
 from src.llm_handler import LLMHandler
 from src.location_service import LocationService
+from streamlit_option_menu import option_menu
 import json
 import os
 
@@ -39,100 +41,168 @@ if 'llm_handler' not in st.session_state:
 if 'location_service' not in st.session_state:
     st.session_state.location_service = LocationService()
 
+def get_base64_image(path):
+    with open(path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+logo_base64 = get_base64_image("assets/logo.png")
+
 # Custom CSS
 st.markdown("""
-    <style>
-    .main {
-        max-width: 1200px;
-    }
-    .chat-message {
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        margin-bottom: 1rem;
-        display: flex;
-        gap: 1rem;
-    }
-    .chat-message.user {
-        background-color: #e3f2fd;
-    }
-    .chat-message.bot {
-        background-color: #f5f5f5;
-    }
-    .card {
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        background-color: #f9f9f9;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+<style>
+
+.block-container {
+    max-width: 1200px;
+}
+
+.stMetric {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 # Sidebar
 with st.sidebar:
-    st.title("🎓 Campus Info Chatbot")
-    
-    menu_option = st.radio(
-        "Navigation",
-        ["💬 Chat", "📅 Events", "🏫 Clubs", "🏢 Facilities", 
-         "📍 Locations", "❓ FAQs", "⚙️ Admin Panel"]
+    st.markdown("""
+    <div style="
+        text-align:center;
+        padding:20px;
+        border-radius:15px;
+        background: linear-gradient(135deg, #111827, #1E3A8A);
+        color:white;
+        margin-bottom:20px;
+    ">
+        <h1 style="margin-bottom:5px;">🎓Campus Chatbot</h1>
+        <p style="font-size:18px;">
+            AI-Powered Campus Assistant
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div style='text-align:center; color:#9CA3AF; font-size:14px;'>
+            👨‍💻 Developed by Team SreNiV❤️
+        </div>
+        """,
+        unsafe_allow_html=True
     )
-    
-    st.markdown("---")
-    
-    # Session info
-    st.subheader("Session Info")
-    st.caption(f"Session ID: {st.session_state.session_id[:8]}...")
-    st.caption(f"Messages: {len(st.session_state.chat_history)}")
-    
-    # Clear chat button
-    if st.button("🗑️ Clear Chat History"):
+
+    st.divider()
+
+    menu_option = option_menu(
+        menu_title=None,
+        options=[
+            "Chat",
+            "Events",
+            "Clubs",
+            "Facilities",
+            "Locations",
+            "FAQs",
+            "Admin"
+        ],
+        icons=[
+            "chat-dots",
+            "calendar-event",
+            "people",
+            "building",
+            "geo-alt",
+            "question-circle",
+            "gear"
+        ],
+        default_index=0
+    )
+
+    st.divider()
+
+    st.markdown("### 📊 Dashboard")
+
+    st.metric(
+        "Questions Asked",
+        len(st.session_state.chat_history) // 2
+    )
+
+    if st.button(
+        "🗑️ Clear Chat",
+        use_container_width=True
+    ):
         st.session_state.chat_history = []
         st.rerun()
-
 # Main content
-if menu_option == "💬 Chat":
-    st.header("Chat with Campus Assistant")
-    
+if menu_option == "Chat":
+
+    st.markdown(f"""
+        <style>
+        .logo-container {{
+            position: fixed;
+            top: 30px;
+            right: 20px;
+            z-index: 9999;
+        }}
+
+        .logo-container img {{
+            width: 90px;
+        }}
+        </style>
+
+        <div class="logo-container">
+            <img src="data:image/png;base64,{logo_base64}">
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("""
+        # 🎓Campus Chatbot
+        ###  Intelligent Campus Assistant
+        Get instant information about:
+        -  🗓️Events
+        -  👥Clubs
+        -  🏛️Facilities
+        -  📌Campus Locations
+        -  💼Placements
+        """)
+
     # Display chat history
-    chat_container = st.container()
-    
-    with chat_container:
-        for message in st.session_state.chat_history:
-            if message['role'] == 'user':
-                st.markdown(f"**You:** {message['content']}")
-            else:
-                st.markdown(f"**Bot:** {message['content']}")
+    for message in st.session_state.chat_history:
+
+        if message["role"] == "user":
+            with st.chat_message("user", avatar="👤"):
+                st.markdown(message["content"])
+
+        else:
+            with st.chat_message("assistant", avatar="✨"):
+                st.markdown(message["content"])
+    # for message in st.session_state.chat_history:
+
+    #     role = "assistant"
+
+    #     if message["role"] == "user":
+    #         role = "user"
+
+    #     with st.chat_message(role):
+    #         st.markdown(message["content"])
     
     # Input section
     st.markdown("---")
-    with st.form("chat_form", clear_on_submit=True):
-        col1, col2 = st.columns([0.9, 0.1])
+    user_input = st.chat_input(
+        "Ask anything about campus..."
+    )
 
-        with col1:
-            user_input = st.text_input(
-                "Ask me anything about campus...",
-                placeholder="e.g., Where is the library? How to join coding club?"
-            )
-
-        with col2:
-            send_button = st.form_submit_button(
-                "Send",
-                use_container_width=True
-            )
-
-    if send_button and user_input:
+    if user_input:
         # Search knowledge base
         search_results = st.session_state.kb.search(user_input, k=3)
         context = "\n".join([r['content'] for r in search_results])
         
         # Get LLM response
-        with st.spinner("Thinking..."):
-            response, _ = st.session_state.llm_handler.get_response(
-                user_input,
-                context=context,
-                chat_history=st.session_state.chat_history
-            )
+        with st.chat_message("assistant"):
+            with st.spinner("Chatbot is thinking..."):
+                response, _ = st.session_state.llm_handler.get_response(
+                    user_input,
+                    context=context,
+                    chat_history=st.session_state.chat_history
+                )
+                st.markdown(response)
         
         # Update chat history
         st.session_state.chat_history.append({
@@ -153,8 +223,8 @@ if menu_option == "💬 Chat":
         
         st.rerun()
 
-elif menu_option == "📅 Events":
-    st.header("📅 Events")
+elif menu_option == "Events":
+    st.header("🗓️ Events")
     
     #events = st.session_state.db.get_upcoming_events(limit=20)
     with open("./data/events.json", "r", encoding="utf-8") as f:
@@ -180,8 +250,8 @@ elif menu_option == "📅 Events":
     else:
         st.info("No events found.")
 
-elif menu_option == "🏫 Clubs":
-    st.header("🏫 Student Clubs")
+elif menu_option == "Clubs":
+    st.header("👥 Student Clubs")
     
     #clubs = st.session_state.db.get_all_clubs()
     with open("./data/clubs.json", "r", encoding="utf-8") as f:
@@ -249,7 +319,7 @@ elif menu_option == "🏫 Clubs":
     else:
         st.info("No clubs found. Check back soon!")
 
-elif menu_option == "🏢 Facilities":
+elif menu_option == "Facilities":
     st.header("🏢 Campus Facilities")
     
     # Category filter
@@ -304,8 +374,8 @@ elif menu_option == "🏢 Facilities":
     else:
         st.info("No facilities found in this category.")
 
-elif menu_option == "📍 Locations":
-    st.header("📍 Campus Locations")
+elif menu_option == "Locations":
+    st.header("📌 Campus Locations")
 
     location_search = st.text_input(
         "Search location...",
@@ -329,8 +399,8 @@ elif menu_option == "📍 Locations":
     else:
         st.info("Enter a location name to search")
 
-elif menu_option == "❓ FAQs":
-    st.header("❓ Frequently Asked Questions")
+elif menu_option == "FAQs":
+    st.header("💬 Frequently Asked Questions")
     
     faqs = [
         {
@@ -359,7 +429,7 @@ elif menu_option == "❓ FAQs":
         with st.expander(faq['question']):
             st.write(faq['answer'])
 
-elif menu_option == "⚙️ Admin Panel":
+elif menu_option == "Admin":
     st.header("⚙️ Admin Panel")
     
     # Authentication
@@ -369,26 +439,28 @@ elif menu_option == "⚙️ Admin Panel":
         st.success("Admin access granted")
         st.subheader("Website Sync")
 
-    if st.button("🔄 Refresh Events From KUCET"):
+        if st.button("🔄 Refresh Events From KUCET"):
 
-        scraper = CampusWebScraper()
+           scraper = CampusWebScraper()
 
-        events = scraper.scrape_kucet_events()
+           events = scraper.scrape_kucet_events()
+ 
+           with open("./data/events.json", "w", encoding="utf-8") as f:
+                json.dump(
+                  events,
+                  f,
+                  indent=4,
+                  ensure_ascii=False
+                )
 
-        with open("./data/events.json", "w", encoding="utf-8") as f:
-            json.dump(
-                events,
-                f,
-                indent=4,
-                ensure_ascii=False
-            )
-
-        st.success(f"Updated {len(events)} events!")
+           st.success(f"Updated {len(events)} events!")
 
         admin_option = st.radio(
-        "Admin Options",
-        ["Upload Documents", "Add Event", "Add Club", "Add Facility", "View Analytics"]
-        )
+           "Admin Options",
+           [
+              "Upload Documents", "Add Event", "Add Club", "Add Facility", "View Analytics"
+           ]
+          )
         
         if admin_option == "Upload Documents":
             st.subheader("Upload Campus Documents")
@@ -637,7 +709,3 @@ elif menu_option == "⚙️ Admin Panel":
         else:
            if admin_password:
             st.error("Invalid password")
-
-# Footer
-st.markdown("---")
-st.markdown("👨‍💻 Campus Info Chatbot | By Vaishnavi, Sreshta, and Nithya")

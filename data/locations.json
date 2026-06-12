@@ -122,7 +122,7 @@
     "place_name": "Girl's Hostel",
     "building": "D Block Near Second Gate",
     "floor": "Ground Floor",
-    "category": "Hostel"
+    "category": "Student Support Services"
   },
   {
     "id": 14,
@@ -130,5 +130,19 @@
     "building": "Block B",
     "floor": "2nd Floor",
     "category": "Administration"
+  },
+  {
+    "id": 15,
+    "place_name": "hostel office",
+    "building": "A short distance from Gate 2, on the second left.",
+    "floor": "Ground Floor",
+    "category": "Student Support Services"
+  },
+  {
+    "id": 16,
+    "place_name": "Physics Lab",
+    "building": "KUCE&T",
+    "floor": "First Floor, Located next to the NCC Hall.",
+    "category": "classroom_block"
   }
 ]

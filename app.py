@@ -137,7 +137,7 @@ if menu_option == "Chat":
         <style>
         .logo-container {{
             position: fixed;
-            top: 30px;
+            top: 65px;
             right: 20px;
             z-index: 9999;
         }}

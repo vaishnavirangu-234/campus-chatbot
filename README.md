@@ -268,25 +268,37 @@ streamlit run app.py
 
 AI-powered conversational campus assistant.
 
+![Chat Interface](assets/screenshots/chat.png)
+
 ### 📅 Events Module
 
 Displays latest KUCET announcements and official notices.
+
+![Events](assets/screenshots/events.png)
 
 ### 🏫 Student Clubs
 
 Browse clubs, coordinators, and contact details.
 
+![Clubs](assets/screenshots/clubs.png)
+
 ### 📍 Campus Locations
 
 Search hostels, labs, classrooms, and buildings.
+
+![Locations](assets/screenshots/locations.png)
 
 ### ❓ FAQ System
 
 Quick answers to frequently asked student questions.
 
+![FAQ](assets/screenshots/FAQ.png)
+
 ### ⚙️ Admin Dashboard
 
 Manage documents, events, clubs, facilities, and analytics.
+
+![Admin](assets/screenshots/admin_panel.png)
 
 ---
 

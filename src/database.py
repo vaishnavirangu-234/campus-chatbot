@@ -317,9 +317,6 @@ class CampusDatabase:
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
-        cursor.execute("SELECT COUNT(*) FROM facilities")
-        print("Total facilities:", cursor.fetchone()[0])
-
         cursor.execute('''
             SELECT * FROM facilities 
             WHERE category = ? AND is_active = 1

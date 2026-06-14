@@ -341,7 +341,17 @@ elif menu_option == "Facilities":
             facilities.extend(st.session_state.db.get_facilities_by_category(cat))
     else:
         facilities = st.session_state.db.get_facilities_by_category(selected_category)
-    
+     # ADD THIS HERE
+        import sqlite3
+
+        conn = sqlite3.connect("./data/campus_chatbot.db")
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT COUNT(*) FROM facilities")
+        st.write("Facilities count:", cursor.fetchone()[0])
+
+        conn.close()
+
     if facilities:
         for facility in facilities:
             with st.container():

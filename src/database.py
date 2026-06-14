@@ -316,6 +316,9 @@ class CampusDatabase:
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
+
+        cursor.execute("SELECT COUNT(*) FROM facilities")
+        st.write("Total facilities:", cursor.fetchone()[0])
         
         cursor.execute('''
             SELECT * FROM facilities 

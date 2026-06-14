@@ -32,6 +32,19 @@ if 'chat_history' not in st.session_state:
 if 'db' not in st.session_state:
     st.session_state.db = CampusDatabase()
 
+    import sqlite3
+
+    conn = sqlite3.connect("./data/campus_chatbot.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM facilities")
+    count = cursor.fetchone()[0]
+
+    conn.close()
+
+    if count == 0:
+        exec(open("load_sample_data.py").read())
+
 if 'kb' not in st.session_state:
     st.session_state.kb = KnowledgeBase()
 
@@ -137,7 +150,7 @@ if menu_option == "Chat":
         <style>
         .logo-container {{
             position: fixed;
-            top: 30px;
+            top: 65px;
             right: 20px;
             z-index: 9999;
         }}
@@ -321,7 +334,7 @@ elif menu_option == "Clubs":
 
 elif menu_option == "Facilities":
     st.header("🏢 Campus Facilities")
-    
+
     # Category filter
     categories = [
         "All",
@@ -341,7 +354,7 @@ elif menu_option == "Facilities":
             facilities.extend(st.session_state.db.get_facilities_by_category(cat))
     else:
         facilities = st.session_state.db.get_facilities_by_category(selected_category)
-    
+
     if facilities:
         for facility in facilities:
             with st.container():

@@ -32,6 +32,19 @@ if 'chat_history' not in st.session_state:
 if 'db' not in st.session_state:
     st.session_state.db = CampusDatabase()
 
+    import sqlite3
+
+    conn = sqlite3.connect("./data/campus_chatbot.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM facilities")
+    count = cursor.fetchone()[0]
+
+    conn.close()
+
+    if count == 0:
+        exec(open("load_sample_data.py").read())
+
 if 'kb' not in st.session_state:
     st.session_state.kb = KnowledgeBase()
 
@@ -341,16 +354,6 @@ elif menu_option == "Facilities":
             facilities.extend(st.session_state.db.get_facilities_by_category(cat))
     else:
         facilities = st.session_state.db.get_facilities_by_category(selected_category)
-     # ADD THIS HERE
-        import sqlite3
-
-        conn = sqlite3.connect("./data/campus_chatbot.db")
-        cursor = conn.cursor()
-
-        cursor.execute("SELECT COUNT(*) FROM facilities")
-        st.write("Facilities count:", cursor.fetchone()[0])
-
-        conn.close()
 
     if facilities:
         for facility in facilities:

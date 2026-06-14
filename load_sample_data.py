@@ -35,7 +35,7 @@ with open("data/facilities.json", "r") as f:
 for facility in facilities:
     db.insert_facility(
         name=facility["name"],
-        category="Academic",
+        category=facility["category"],
         location=facility["location"],
         description=facility["description"]
     )

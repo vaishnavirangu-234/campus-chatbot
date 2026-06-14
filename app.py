@@ -321,7 +321,8 @@ elif menu_option == "Clubs":
 
 elif menu_option == "Facilities":
     st.header("🏢 Campus Facilities")
-    
+    st.write("Exists:", os.path.exists("data/facilities.json"))
+
     # Category filter
     categories = [
         "All",

@@ -318,8 +318,8 @@ class CampusDatabase:
         cursor = conn.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM facilities")
-        st.write("Total facilities:", cursor.fetchone()[0])
-        
+        print("Total facilities:", cursor.fetchone()[0])
+
         cursor.execute('''
             SELECT * FROM facilities 
             WHERE category = ? AND is_active = 1

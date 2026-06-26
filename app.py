@@ -359,6 +359,7 @@ elif menu_option == "Facilities":
         for facility in facilities:
             with st.container():
                 st.subheader(f"📍 {facility['name']}")
+                st.write(f"**Category:** {facility['category']}")
                 st.write(f"**Location:** {facility['location']}")
                 
                 if facility['description']:

@@ -353,12 +353,12 @@ elif menu_option == "Facilities":
                 st.subheader(f"📍 {facility['name']}")
             if "timings" in facility:
                 st.write(f"⏰ **Timings:** {facility['timings']}")
+
+            st.write(f"📍 **Location:** {facility['location']}")
+            st.write(f"📝 **Description:** {facility['description']}")
+
             if "eligibility" in facility:
                 st.write(f"🎓 **Eligibility:** {facility['eligibility']}")
-                st.write(f"**Location:** {facility['location']}")
-                
-                if facility['description']:
-                    st.write(f"**Description:** {facility['description']}")
                 
                 col1, col2 = st.columns(2)
                 

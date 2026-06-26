@@ -360,23 +360,28 @@ elif menu_option == "Facilities":
             if "eligibility" in facility:
                 st.write(f"🎓 **Eligibility:** {facility['eligibility']}")
                 
-                col1, col2 = st.columns(2)
+                # col1, col2 = st.columns(2)
                 
-                with col1:
-                    if facility['hours_open']:
-                        st.write(f"⏰ **Hours:** {facility['hours_open']} - {facility['hours_close']}")
-                    if facility['capacity']:
-                        st.write(f"**Capacity:** {facility['capacity']}")
+                # with col1:
+                #     if facility['hours_open']:
+                #         st.write(f"⏰ **Hours:** {facility['hours_open']} - {facility['hours_close']}")
+                #     if facility['capacity']:
+                #         st.write(f"**Capacity:** {facility['capacity']}")
                 
-                with col2:
-                    if facility['contact_name']:
-                        st.write(f"**Contact:** {facility['contact_name']}")
-                    if facility['contact_phone']:
-                        st.write(f"**Phone:** {facility['contact_phone']}")
+                # with col2:
+                #     if facility['contact_name']:
+                #         st.write(f"**Contact:** {facility['contact_name']}")
+                #     if facility['contact_phone']:
+                #         st.write(f"**Phone:** {facility['contact_phone']}")
                 
-                if facility['amenities']:
-                    amenities = facility['amenities'].split(',')
-                    st.write("**Amenities:** " + ", ".join([a.strip() for a in amenities]))
+                # if facility['amenities']:
+                #     amenities = facility['amenities'].split(',')
+                #     st.write("**Amenities:** " + ", ".join([a.strip() for a in amenities]))
+                if "timings" in facility:
+                    st.write(f"⏰ **Timings:** {facility['timings']}")
+
+                if "eligibility" in facility:
+                    st.write(f"🎓 **Eligibility:** {facility['eligibility']}")
             
             st.divider()
     else:

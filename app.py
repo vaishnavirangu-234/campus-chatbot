@@ -335,31 +335,26 @@ elif menu_option == "Clubs":
 elif menu_option == "Facilities":
     st.header("🏢 Campus Facilities")
 
-    # Category filter
-    categories = [
-        "All",
-        "Academic",
-        "Food & Dining",
-        "Health & Wellness",
-        "Recreation",
-        "Administrative"
-    ]
+    # selected_category = st.selectbox("Filter by category:", categories)
     
-    selected_category = st.selectbox("Filter by category:", categories)
-    
-    if selected_category == "All":
-        # Get all facilities (you'll need to add this method)
-        facilities = []
-        for cat in categories[1:]:
-            facilities.extend(st.session_state.db.get_facilities_by_category(cat))
-    else:
-        facilities = st.session_state.db.get_facilities_by_category(selected_category)
+    # if selected_category == "All":
+    #     # Get all facilities (you'll need to add this method)
+    #     facilities = []
+    #     for cat in categories[1:]:
+    #         facilities.extend(st.session_state.db.get_facilities_by_category(cat))
+    # else:
+    #     facilities = st.session_state.db.get_facilities_by_category(selected_category)
+    with open("./data/facilities.json", "r", encoding="utf-8") as f:
+     facilities = json.load(f)
 
     if facilities:
         for facility in facilities:
             with st.container():
                 st.subheader(f"📍 {facility['name']}")
-                st.write(f"**Category:** {facility['category']}")
+            if "timings" in facility:
+                st.write(f"⏰ **Timings:** {facility['timings']}")
+            if "eligibility" in facility:
+                st.write(f"🎓 **Eligibility:** {facility['eligibility']}")
                 st.write(f"**Location:** {facility['location']}")
                 
                 if facility['description']:

@@ -20,6 +20,10 @@ for club in clubs:
         pass
 
 # Events
+# Events
+with open("data/events.json", "r") as f:
+    events = json.load(f)
+
 for event in events:
     try:
         db.insert_event(
@@ -31,7 +35,6 @@ for event in events:
         )
     except sqlite3.IntegrityError:
         pass
-
 # Facilities
 with open("data/facilities.json", "r") as f:
     facilities = json.load(f)

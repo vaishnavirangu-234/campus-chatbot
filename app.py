@@ -42,8 +42,8 @@ if 'db' not in st.session_state:
 
     conn.close()
 
-    if count == 0:
-        exec(open("load_sample_data.py").read())
+    # if count == 0:
+    #     exec(open("load_sample_data.py").read())
 
 if 'kb' not in st.session_state:
     st.session_state.kb = KnowledgeBase()
